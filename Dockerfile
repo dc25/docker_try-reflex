@@ -14,11 +14,12 @@ RUN apt-get update && apt-get install -y \
 ## Enable sudo w/o password
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-## Set up user "reflex" to run try-reflex
 ENV USER_NAME reflex
 ENV HOME_DIR /$USER_NAME
 
-RUN adduser --disabled-password --gecos '' $USER_NAME --home $HOME_DIR > /dev/null 2>&1 
+## Set up user "reflex" to run try-reflex
+## Assign arbitrary uid to avoid collision with user on host machine
+RUN adduser --disabled-password --gecos '' $USER_NAME --home $HOME_DIR --uid 21348 > /dev/null 2>&1 
 RUN adduser $USER_NAME sudo > /dev/null 2>&1 
 
 ## Make sure tmux runs with /bin/bash and not the nix bash.

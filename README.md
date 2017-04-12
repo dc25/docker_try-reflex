@@ -35,6 +35,6 @@ If you are using this -v option to access a directory on your host computer you 
     
     id -u 
 
-You can specify the user id for the "reflex" user at docker build time by adding the --uid option to the "adduser" line in the Dockerfile:
+Use the --uid option to "adduser" in the Dockerfile to specify the user id for the "reflex" user:
 
     RUN adduser --disabled-password --gecos '' $USER_NAME --home $HOME_DIR --uid <ID> > /dev/null 2>&1 
