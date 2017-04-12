@@ -6,6 +6,10 @@
 # Run:
     docker run -it --entrypoint /start.sh try-reflex
 
+or from published image:
+
+    docker run -it --entrypoint /start.sh davecompton/try-reflex
+
 The start.sh script will run try-reflex as user "reflex".  This script starts a nix shell in which you can run ghcjs to compile programs that use reflex and reflex-dom.
 
 # First Time:
