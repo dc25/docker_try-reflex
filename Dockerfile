@@ -1,51 +1,42 @@
 FROM ubuntu:16.10
 
-# Set the locale - was (and may still be ) necessary for ghcjs-boot to work
-# Got this originally here: # http://askubuntu.com/questions/581458/how-to-configure-locales-to-unicode-in-a-docker-ubuntu-14-04-container
-#
-# 2015-10-25 It seems like ghcjs-boot works without this now but when I 
-# removed it, vim starting emitting error messages when using plugins 
-# pathogen and vim2hs together.  
-#
-# 2016-07-11 Tried taking it out again.
-# 2016-07-11 Did not notice problems with vim but saw errors reported that 
-#            were not there before when running ./try-reflex . Leaving in.
-RUN locale-gen en_US.UTF-8  
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8  
-
 RUN apt-get update && apt-get install -y \
     bzip2 \
     cpio \
     curl \
-    daemontools \
-    entr \
-    gcc \
     git \
-    make \
     net-tools \
-    openssh-server \
     python \
     tmux \
     sudo \
     vim-gtk 
 
-## enable sudo w/o password
+## Enable sudo w/o password
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-COPY start.sh /
-
-## set up user "reflex" to run try-reflex
+## Set up user "reflex" to run try-reflex
 ENV USER_NAME reflex
 ENV HOME_DIR /$USER_NAME
 
 RUN adduser --disabled-password --gecos '' $USER_NAME --home $HOME_DIR > /dev/null 2>&1 
 RUN adduser $USER_NAME sudo > /dev/null 2>&1 
 
-## do the remaining setup as user "reflex"
-COPY reflex_home/user_configuration.sh $HOME_DIR
-RUN sudo su $USER_NAME -c $HOME_DIR/user_configuration.sh
+## Make sure tmux runs with /bin/bash and not the nix bash.
+## Otherwise arrow keys in bash don't work right.
+COPY tmux.conf $HOME_DIR/.tmux.conf
 
-## copy in config files as last step 
-COPY reflex_home $HOME_DIR
+## Prepare reflex-platform clone as user "reflex", 
+RUN sudo su $USER_NAME -c "cd $HOME_DIR; git clone https://github.com/reflex-frp/reflex-platform.git"
+
+## Run "start.sh" when starting container
+COPY start.sh /
+
+# Set the locale 
+# Got this originally here: # http://askubuntu.com/questions/581458/how-to-configure-locales-to-unicode-in-a-docker-ubuntu-14-04-container
+#
+# Prevents some terminal related problems.
+#
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8  
