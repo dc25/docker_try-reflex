@@ -1,7 +1,11 @@
 # dockerfile_try-reflex
 
-Build:
-  dockr build -t try-reflex .
+# Build:
+    docker build -t try-reflex .
 
-Run:
-  dockr run -it --entrypoint /start.sh try-reflex
+# Run:
+    docker run -it --entrypoint /start.sh try-reflex
+
+# When running the first time, use:
+    docker commit <containerName> try-reflex
+
