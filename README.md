@@ -16,19 +16,18 @@ The first time you run (as shown above) the try-reflex script will take a while 
 
 # tmux
 
-    For a better working environment, run tmux.  Inside of tmux you can create multiple tmux "panes", each with its own bash session.
+For a better working environment, run tmux.  Inside of tmux you can create multiple tmux "panes", each with its own bash session.
 
 # Customization
 
-    When starting a docker container with "docker run" ( as shown above ) you can use the -v option to access a directory on your computer from inside the container:
+When starting a docker container with "docker run" ( as shown above ) you can use the -v option to access a directory on your computer from inside the container:
 
     docker run -it -v /home/dave:/home_in_container/dave --entrypoint /start.sh try-reflex
 
-    If you are using this -v option to access a directory on your host computer you might want the "reflex" user to have the same user id as you.  You can find out your user id with the following shell command:
+If you are using this -v option to access a directory on your host computer you might want the "reflex" user to have the same user id as you.  You can find out your user id with the following shell command:
     
     id -u 
 
-    You can specify the user id for the "reflex" user at docker build time by adding the --uid option to the "adduser" line in the Dockerfile:
+You can specify the user id for the "reflex" user at docker build time by adding the --uid option to the "adduser" line in the Dockerfile:
 
     RUN adduser --disabled-password --gecos '' $USER_NAME --home $HOME_DIR --uid <ID> > /dev/null 2>&1 
-
