@@ -6,6 +6,9 @@
 # Run:
     docker run -it --entrypoint /start.sh try-reflex
 
-# When running the first time, use:
+# First Time:
+
+The first time you run (as shown above) the try-reflex script will take a while to complete ( perhaps an hour or so ).  Use "docker commit" so that this work does not have to be repeated:
+
     docker commit <containerName> try-reflex
 
