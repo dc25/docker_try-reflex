@@ -1,9 +1,10 @@
-# dockerfile_try-reflex - using docker for quick access to a reflex development environment.
+# dockerfile_try-reflex 
+# Use docker for quick & easy access to a reflex dev environment.
 
-# Build:
+## Build:
     docker build -t try-reflex .
 
-# Run:
+## Run:
     docker run -it --entrypoint /start.sh try-reflex
 
 or from published image:
@@ -12,7 +13,7 @@ or from published image:
 
 The start.sh script will run try-reflex as user "reflex".  This script starts a nix shell in which you can run ghcjs to compile programs that use reflex and reflex-dom.
 
-# First Time:
+## First Time:
 
 The first time you run (as shown above) the try-reflex script will take a while to complete ( perhaps an hour or so ).  Use "docker commit" so that this work does not have to be repeated:
 
@@ -20,11 +21,11 @@ The first time you run (as shown above) the try-reflex script will take a while 
 
 This has already been done for the published image so if you start from there, this step is not necessary.
 
-# tmux
+## tmux
 
 For a better working environment, run tmux from the container shell prompt.  Inside of tmux you can create multiple tmux "panes", each with its own bash session.  I couldn't figure out how to automate this.  If you get it working (automatically) please let me know how.
 
-# Customization
+## Customization
 
 When starting a docker container with "docker run" ( as shown above ) you can use the -v option to access a directory on your computer from inside the container:
 
