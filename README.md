@@ -31,7 +31,7 @@ When starting a docker container with "docker run" ( as shown above ) you can us
 
     docker run -it -v /home/dave:/home_in_container/dave --entrypoint /start.sh try-reflex
 
-If you are using this -v option to access a directory on your host computer you might want the "reflex" user in the container to have the same user id as you on your host computer.  You can find out your user id with the following shell command:
+If you are using this -v option to access a directory on your host computer you might want the "reflex" user in the container to have the same user id as you have on your host computer.  You can find out your user id with the following shell command:
     
     id -u 
 
