@@ -45,5 +45,5 @@ RUN adduser $USER_NAME sudo > /dev/null 2>&1
 
 ## copy in config files and script, "user_configuration.sh"
 ## to do the remaining setup as user "reflex"
-COPY build_scripts $HOME_DIR
+COPY reflex_home $HOME_DIR
 RUN sudo su $USER_NAME -c $HOME_DIR/user_configuration.sh
