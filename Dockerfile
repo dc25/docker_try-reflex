@@ -43,7 +43,9 @@ ENV HOME_DIR /$USER_NAME
 RUN adduser --disabled-password --gecos '' $USER_NAME --home $HOME_DIR > /dev/null 2>&1 
 RUN adduser $USER_NAME sudo > /dev/null 2>&1 
 
-## copy in config files and script, "user_configuration.sh"
-## to do the remaining setup as user "reflex"
-COPY reflex_home $HOME_DIR
+## do the remaining setup as user "reflex"
+COPY reflex_home/user_configuration.sh $HOME_DIR
 RUN sudo su $USER_NAME -c $HOME_DIR/user_configuration.sh
+
+## copy in config files as last step 
+COPY reflex_home $HOME_DIR
