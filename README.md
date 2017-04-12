@@ -1,5 +1,5 @@
 # dockerfile_try-reflex 
-# Use docker for quick & easy access to a reflex dev environment.
+# A quick & easy reflex dev environment.
 
 ## Build:
     docker build -t try-reflex .
