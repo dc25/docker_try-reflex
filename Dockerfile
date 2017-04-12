@@ -21,7 +21,9 @@ RUN apt-get update && apt-get install -y \
     curl \
     daemontools \
     entr \
+    gcc \
     git \
+    make \
     net-tools \
     openssh-server \
     python \
@@ -32,7 +34,16 @@ RUN apt-get update && apt-get install -y \
 ## enable sudo w/o password
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-RUN mkdir -p /workarea
-RUN chmod 777 /workarea
-COPY build_scripts /workarea
-RUN /workarea/setup_sshd
+COPY build_scripts/start.sh /
+
+## set up user "reflex" to run try-reflex
+ENV USER_NAME reflex
+ENV HOME_DIR /$USER_NAME
+
+RUN adduser --disabled-password --gecos '' $USER_NAME --home $HOME_DIR > /dev/null 2>&1 
+RUN adduser $USER_NAME sudo > /dev/null 2>&1 
+
+## copy in config files and script, "user_configuration.sh"
+## to do the remaining setup as user "reflex"
+COPY build_scripts $HOME_DIR
+RUN sudo su $USER_NAME -c $HOME_DIR/user_configuration.sh
