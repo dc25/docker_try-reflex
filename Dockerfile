@@ -34,7 +34,7 @@ RUN apt-get update && apt-get install -y \
 ## enable sudo w/o password
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-COPY build_scripts/start.sh /
+COPY start.sh /
 
 ## set up user "reflex" to run try-reflex
 ENV USER_NAME reflex
