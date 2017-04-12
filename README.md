@@ -1,4 +1,4 @@
-# dockerfile_try-reflex
+# dockerfile_try-reflex - using docker for quick access to a reflex development environment.
 
 # Build:
     docker build -t try-reflex .
@@ -17,6 +17,8 @@ The start.sh script will run try-reflex as user "reflex".  This script starts a 
 The first time you run (as shown above) the try-reflex script will take a while to complete ( perhaps an hour or so ).  Use "docker commit" so that this work does not have to be repeated:
 
     docker commit <containerName> try-reflex
+
+This has already been done for the published image so if you start from there, this step is not necessary.
 
 # tmux
 
