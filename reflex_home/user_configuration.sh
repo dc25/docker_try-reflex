@@ -1,5 +1,7 @@
 #! /bin/bash
 
+## Install vim configuration and reflex-platform to prepare to run try-reflex
+
 mkdir -p $HOME/.vim/autoload
 
 #### pathogen
