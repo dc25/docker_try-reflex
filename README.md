@@ -20,7 +20,7 @@ The first time you run (as shown above) the try-reflex script will take a while 
 
 # tmux
 
-For a better working environment, run tmux.  Inside of tmux you can create multiple tmux "panes", each with its own bash session.
+For a better working environment, run tmux from the container shell prompt.  Inside of tmux you can create multiple tmux "panes", each with its own bash session.  I couldn't figure out how to automate this.  If you get it working (automatically) please let me know how.
 
 # Customization
 
