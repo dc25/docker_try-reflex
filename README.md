@@ -5,21 +5,13 @@
     docker build -t try-reflex .
 
 ## Run:
-    docker run -it --entrypoint /start.sh try-reflex
+    docker run -it try-reflex
 
 or from published image:
 
-    docker run -it --entrypoint /start.sh davecompton/try-reflex
+    docker run -it davecompton/try-reflex
 
 The start.sh script will run try-reflex as user "reflex".  This script starts a nix shell in which you can run ghcjs to compile programs that use reflex and reflex-dom.
-
-## First Time:
-
-The first time you run (as shown above) the try-reflex script will take a while to complete ( perhaps an hour or so ).  Use "docker commit" so that this work does not have to be repeated:
-
-    docker commit <containerName> try-reflex
-
-This has already been done for the published image so if you start from there, this step is not necessary.
 
 ## tmux
 
@@ -29,7 +21,7 @@ For a better working environment, run tmux from the container shell prompt.  Ins
 
 When starting a docker container with "docker run" ( as shown above ) you can use the -v option to access a directory on your computer from inside the container:
 
-    docker run -it -v /home/dave:/home_in_container/dave --entrypoint /start.sh try-reflex
+    docker run -it -v /home/dave:/home_in_container/dave try-reflex
 
 If you are using this -v option to access a directory on your host computer you might want the "reflex" user in the container to have the same user id as you have on your host computer.  You can find out your user id with the following shell command:
     
